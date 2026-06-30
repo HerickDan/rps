@@ -1,11 +1,7 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class Palindrom {
-       public static void (){
-           double dbNumber = 25.5;
-           int number = 21;
-           Inte
-       }
+class Palindrom {
+    public boolean isPalindrome(int x) {
+        String numToStr = Integer.toString(x);
+        String reversed = new StringBuilder(numToStr).reverse().toString();
+        return reversed.compareTo(numToStr) == 0;
+    }
 }

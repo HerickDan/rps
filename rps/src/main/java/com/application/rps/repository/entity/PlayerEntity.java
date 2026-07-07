@@ -2,6 +2,7 @@ package com.application.rps.repository.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.UUID;
 
@@ -11,7 +12,7 @@ public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    String apiId;
+    String apiId = UUID.randomUUID().toString();
     String player_name;
 
     public PlayerEntity( String player_name) {
@@ -32,11 +33,6 @@ public class PlayerEntity {
     public String getApiId() {
         return apiId;
     }
-
-    public void setApiId() {
-        this.apiId =  UUID.randomUUID().toString();
-    }
-
     public String getPlayer_name() {
         return player_name;
     }

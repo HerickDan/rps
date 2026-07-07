@@ -19,7 +19,11 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/player/**").permitAll().
                                 requestMatchers(HttpMethod.POST, "/player/**").permitAll().
                                 requestMatchers(HttpMethod.PATCH, "/player/**").permitAll().
-                                requestMatchers(HttpMethod.DELETE, "/player/**").permitAll()
+                                requestMatchers(HttpMethod.DELETE, "/player/**").permitAll().
+                                requestMatchers(HttpMethod.GET, "/room/**").permitAll().
+                                requestMatchers(HttpMethod.POST, "/room/**").permitAll().
+                                requestMatchers(HttpMethod.PATCH, "/room/**").permitAll().
+                                requestMatchers(HttpMethod.DELETE, "/room/**").permitAll()
                 ).build();
     }
 

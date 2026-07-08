@@ -10,18 +10,15 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "room")
-@Getter
-@Setter
-@NoArgsConstructor
 public class RoomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     String apiId = UUID.randomUUID().toString();
+    @Column(name = "room_number")
     int roomNumber = new Random().nextInt(1, 10000);
     @OneToOne
-    @JoinColumn(name = "id")
-    @Column(name = "created_by")
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
     PlayerEntity player;
 
     public Integer getId() {

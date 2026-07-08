@@ -6,5 +6,5 @@ import com.application.rps.repository.entity.RoomEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IGameRepository extends JpaRepository<GameEntity, Integer> {
-    GameEntity findByPlayerOneAndRoomNumber(PlayerEntity playerOne, RoomEntity room);
+    GameEntity findByPlayerOneAndRoom(PlayerEntity playerOne, RoomEntity room);
 }

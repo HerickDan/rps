@@ -6,5 +6,5 @@ import com.application.rps.repository.entity.PlayerEntity;
 
 public interface IPlayerService {
     void createPlayer(CreatePlayerDto dto);
-    PlayerEntity findByPlayerByName(String name);
+    PlayerEntity findByPlayerName(String name);
 }

@@ -1,7 +1,6 @@
 package com.application.rps.repository.entity;
 
 import jakarta.persistence.*;
-import org.springframework.stereotype.Controller;
 
 @Entity
 @Table(name = "game")
@@ -10,20 +9,17 @@ public class GameEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     @ManyToOne
-    @JoinColumn(name = "id")
-    @Column(name = "player_one")
+    @JoinColumn(name = "player_one", referencedColumnName = "id")
     PlayerEntity playerOne;
     @ManyToOne
-    @JoinColumn(name = "id")
-    @Column(name = "player_two")
+    @JoinColumn(name = "player_two", referencedColumnName = "id")
     PlayerEntity playerTwo;
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "winner", referencedColumnName = "id")
     PlayerEntity winner;
     @ManyToOne
-    @JoinColumn(name = "room_number")
-    @Column(name = "game_room")
-    RoomEntity gameRoom;
+    @JoinColumn(name = "game_room", referencedColumnName = "room_number")
+    RoomEntity room;
 
     public PlayerEntity getPlayerOne() {
         return playerOne;
@@ -57,11 +53,11 @@ public class GameEntity {
         this.winner = winner;
     }
 
-    public RoomEntity getGameRoom() {
-        return gameRoom;
+    public RoomEntity getRoom() {
+        return room;
     }
 
-    public void setGameRoom(RoomEntity gameRoom) {
-        this.gameRoom = gameRoom;
+    public void setRoom(RoomEntity room) {
+        this.room = room;
     }
 }

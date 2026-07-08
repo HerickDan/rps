@@ -14,8 +14,7 @@ public class RoomController {
 
     @PostMapping("/{player-name}")
     @ResponseStatus(HttpStatus.CREATED)
-    public RoomResponseDto createRoom(@PathVariable String playerGame){
-
-        return service.createRoom();
+    public RoomResponseDto createRoom(@PathVariable String playerName){
+        return service.createRoom(playerName);
     }
 }

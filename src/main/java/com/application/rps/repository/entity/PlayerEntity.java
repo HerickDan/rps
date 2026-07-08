@@ -13,10 +13,11 @@ public class PlayerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     String apiId = UUID.randomUUID().toString();
-    String player_name;
+    @Column(name = "player_name")
+    String playerName;
 
     public PlayerEntity( String player_name) {
-        this.player_name = player_name;
+        this.playerName = player_name;
     }
 
     public PlayerEntity() {}
@@ -34,10 +35,10 @@ public class PlayerEntity {
         return apiId;
     }
     public String getPlayer_name() {
-        return player_name;
+        return playerName;
     }
 
     public void setPlayer_name(String player_name) {
-        this.player_name = player_name;
+        this.playerName = player_name;
     }
 }

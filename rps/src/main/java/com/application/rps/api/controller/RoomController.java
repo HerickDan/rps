@@ -4,20 +4,17 @@ import com.application.rps.commons.dto.RoomResponseDto;
 import com.application.rps.services.impl.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/room")
+@RequestMapping("/game-room")
 public class RoomController {
     @Autowired
     RoomService service;
 
-    @PostMapping
+    @PostMapping("/{player-name}")
     @ResponseStatus(HttpStatus.CREATED)
-    public RoomResponseDto createRoom(){
+    public RoomResponseDto createRoom(@PathVariable String playerGame){
         return service.createRoom();
     }
 }

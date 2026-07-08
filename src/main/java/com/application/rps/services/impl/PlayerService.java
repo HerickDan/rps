@@ -19,4 +19,10 @@ public class PlayerService implements IPlayerService {
         entity.setPlayer_name(dto.getName());
         repository.save(entity);
     }
+
+    @Override
+    public PlayerEntity findByPlayerName(String playerName){
+        return repository.findByPlayerName(playerName);
+    }
+
 }

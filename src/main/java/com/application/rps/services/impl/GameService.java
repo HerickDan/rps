@@ -1,5 +1,11 @@
 package com.application.rps.services.impl;
 
+import com.application.rps.commons.dto.JoinMatchDto;
+import com.application.rps.commons.dto.RoomResponseDto;
+import com.application.rps.repository.IGameRepository;
+import com.application.rps.repository.entity.GameEntity;
+import com.application.rps.repository.entity.PlayerEntity;
+import com.application.rps.repository.entity.RoomEntity;
 import com.application.rps.services.interfaces.IGameService;
 import com.application.rps.services.interfaces.IPlayerService;
 import com.application.rps.services.interfaces.IRoomService;
@@ -12,4 +18,31 @@ public class GameService implements IGameService {
     IPlayerService playerService;
     @Autowired
     IRoomService roomService;
+    @Autowired
+    IGameRepository gameRepository;
+
+    @Override
+    public String createMatch(
+            String playerName
+    ){
+        GameEntity entity = new GameEntity();
+        RoomResponseDto room = roomService.createRoom(playerName);
+        RoomEntity roomNumber = roomService.findByRoomNumber(room.getRoomNumber());
+        entity.setRoom(roomNumber);
+        PlayerEntity playerOne = playerService.findByPlayerName(playerName);
+        entity.setPlayerOne(playerOne);
+        gameRepository.save(entity);
+        return "match created, waiting player two  \n this is the room number: " + room.getRoomNumber();
+    }
+
+    @Override
+    public String joinMatch(JoinMatchDto dto){
+        PlayerEntity playerOne = playerService.findByPlayerName(dto.getPlayerName());
+        RoomEntity room = roomService.findByRoomNumber(dto.getRoom_number());
+        GameEntity gameMatch = gameRepository.findByPlayerOneAndRoom(playerOne, room);
+        if (gameMatch != null){
+            return "Player %s is already in the match".formatted(dto.getPlayerName());
+        }
+        return "Created";
+    }
 }

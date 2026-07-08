@@ -1,0 +1,19 @@
+services:
+ app:
+  build: .
+  ports:
+    - "8080:8080"
+  environment:
+    SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/rps-db
+    SPRING_DATASOURCE_USERNAME: test
+    SPRING_DATASOURCE_PASSWORD: test
+  depends_on:
+    - postgres
+ postgres:
+    image: 'postgres:15.4'
+    environment:
+      - 'POSTGRES_DB=rps-db'
+      - 'POSTGRES_PASSWORD=test'
+      - 'POSTGRES_USER=test'
+    ports:
+      - '5432:5432'

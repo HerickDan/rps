@@ -1,0 +1,5 @@
+CREATE TABLE player(
+     id SERIAL PRIMARY KEY,
+     api_id VARCHAR(255) NOT NULL UNIQUE,
+     player_name VARCHAR(255) NOT NULL UNIQUE
+);

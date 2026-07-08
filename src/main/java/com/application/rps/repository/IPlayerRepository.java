@@ -2,5 +2,9 @@ package com.application.rps.repository;
 
 import com.application.rps.repository.entity.PlayerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface IPlayerRepository extends JpaRepository<PlayerEntity, Integer> {}
+@Repository
+public interface IPlayerRepository extends JpaRepository<PlayerEntity, Integer> {
+    PlayerEntity findByPlayerName(String playerName);
+}

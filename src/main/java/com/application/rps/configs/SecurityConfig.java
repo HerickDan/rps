@@ -24,15 +24,15 @@ public class SecurityConfig {
                                 requestMatchers(HttpMethod.POST, "/room/**").permitAll().
                                 requestMatchers(HttpMethod.PATCH, "/room/**").permitAll().
                                 requestMatchers(HttpMethod.DELETE, "/room/**").permitAll()
-                ).build();
+                                .requestMatchers("/ws", "/ws/**").permitAll()).build();
     }
 
     @Bean
-    WebMvcConfigurer corsConfig(){
+    WebMvcConfigurer corsConfig() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(CorsRegistry registry){
-                registry.addMapping("/**").allowedOrigins("*");
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/ws").allowedOrigins("*");
             }
         };
     }

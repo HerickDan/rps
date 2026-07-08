@@ -14,6 +14,16 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class RoomEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
+    String apiId = UUID.randomUUID().toString();
+    int roomNumber = new Random().nextInt(1, 10000);
+    @OneToOne
+    @JoinColumn(name = "id")
+    @Column(name = "created_by")
+    PlayerEntity player;
+
     public Integer getId() {
         return id;
     }
@@ -38,9 +48,12 @@ public class RoomEntity {
         this.roomNumber = roomNumber;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    String apiId = UUID.randomUUID().toString();
-    int roomNumber = new Random().nextInt(1, 10000);
+    public PlayerEntity getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(PlayerEntity player) {
+        this.player = player;
+    }
+
 }

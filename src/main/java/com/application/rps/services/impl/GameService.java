@@ -37,12 +37,11 @@ public class GameService implements IGameService {
 
     @Override
     public String joinMatch(JoinMatchDto dto){
-        PlayerEntity playerOne = playerService.findByPlayerName(dto.getPlayerName());
+        PlayerEntity playerTwo = playerService.findByPlayerName(dto.getPlayerName());
         RoomEntity room = roomService.findByRoomNumber(dto.getRoom_number());
-        GameEntity gameMatch = gameRepository.findByPlayerOneAndRoom(playerOne, room);
-        if (gameMatch != null){
-            return "Player %s is already in the match".formatted(dto.getPlayerName());
-        }
-        return "Created";
+        GameEntity gameMatch = gameRepository.findByRoom( room);
+            gameMatch.setPlayerTwo(playerTwo);
+            gameRepository.save(gameMatch);
+            return "Created Match";
     }
 }

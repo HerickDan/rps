@@ -1,0 +1,7 @@
+ALTER TABLE game
+ADD COLUMN p1Movement VARCHAR(256);
+
+ALTER TABLE game
+ADD COLUMN p2Movement VARCHAR(256);
+
+

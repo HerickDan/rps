@@ -21,11 +21,11 @@ public class PlayGameDto {
         this.playerName = playerName;
     }
 
-    public MovementEnum getMovimentEnum() {
+    public MovementEnum getMovementEnum() {
         return movementEnum;
     }
 
-    public void setMovimentEnum(MovementEnum movementEnum) {
+    public void setMovementEnum(MovementEnum movementEnum) {
         this.movementEnum = movementEnum;
     }
 

@@ -1,5 +1,6 @@
 package com.application.rps.repository.entity;
 
+import com.application.rps.commons.enums.MovementEnum;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,6 +21,24 @@ public class GameEntity {
     @ManyToOne
     @JoinColumn(name = "game_room", referencedColumnName = "room_number")
     RoomEntity room;
+    MovementEnum p1movement;
+    MovementEnum p2movement;
+
+    public MovementEnum getP1movement() {
+        return p1movement;
+    }
+
+    public void setP1movement(MovementEnum p1movement) {
+        this.p1movement = p1movement;
+    }
+
+    public MovementEnum getP2movement() {
+        return p2movement;
+    }
+
+    public void setP2movement(MovementEnum p2movement) {
+        this.p2movement = p2movement;
+    }
 
     public PlayerEntity getPlayerOne() {
         return playerOne;

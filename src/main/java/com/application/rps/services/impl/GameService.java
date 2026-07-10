@@ -1,7 +1,9 @@
 package com.application.rps.services.impl;
 
 import com.application.rps.commons.dto.JoinMatchDto;
+import com.application.rps.commons.dto.PlayGameDto;
 import com.application.rps.commons.dto.RoomResponseDto;
+import com.application.rps.commons.enums.MovementEnum;
 import com.application.rps.repository.IGameRepository;
 import com.application.rps.repository.entity.GameEntity;
 import com.application.rps.repository.entity.PlayerEntity;
@@ -43,5 +45,47 @@ public class GameService implements IGameService {
             gameMatch.setPlayerTwo(playerTwo);
             gameRepository.save(gameMatch);
             return "Created Match";
+    }
+
+    @Override
+    public String playGame(PlayGameDto dto) {
+
+        RoomEntity room = roomService.findByRoomNumber(dto.getRoomNumber());
+        GameEntity match = gameRepository.findByRoom(room);
+
+        boolean isPlayerOne = match.getPlayerOne().getPlayer_name().equals(dto.getPlayerName());
+
+        if (isPlayerOne) {
+            if (match.getP1movement() != null) {
+                return "Player one already played";
+            }
+            match.setP1movement(dto.getMovementEnum());
+        } else {
+            if (match.getP2movement() != null) {
+                return "Player two already played";
+            }
+            match.setP2movement(dto.getMovementEnum());
+        }
+
+        gameRepository.save(match);
+
+        if (match.getP1movement() == null || match.getP2movement() == null) {
+            return "Waiting for the other player...";
+        }
+
+        if (match.getP1movement() == match.getP2movement()) {
+            return "Draw";
+        }
+
+        boolean playerOneWins = switch (match.getP1movement()) {
+            case ROCK -> match.getP2movement() == MovementEnum.SCISSOR;
+            case PAPER -> match.getP2movement() == MovementEnum.ROCK;
+            case SCISSOR -> match.getP2movement() == MovementEnum.PAPER;
+        };
+
+        match.setWinner(playerOneWins ? match.getPlayerOne() : match.getPlayerTwo());
+        gameRepository.save(match);
+
+        return playerOneWins ? "Player One Wins" : "Player Two Wins";
     }
 }

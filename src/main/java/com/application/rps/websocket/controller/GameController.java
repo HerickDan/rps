@@ -1,6 +1,7 @@
 package com.application.rps.websocket.controller;
 
 import com.application.rps.commons.dto.JoinMatchDto;
+import com.application.rps.commons.dto.PlayGameDto;
 import com.application.rps.services.interfaces.IGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -27,5 +28,11 @@ public class GameController {
     public void joinMatch(JoinMatchDto dto)throws Exception{
         String joinMatch = gameService.joinMatch(dto);
         template.convertAndSend("/room/" + dto.getRoom_number(), joinMatch);
+    }
+
+    @MessageMapping("/game-room/play")
+    public void playGame(PlayGameDto dto)throws Exception{
+        String joinMatch = gameService.playGame(dto);
+        template.convertAndSend("/room/" + dto.getRoomNumber(), joinMatch);
     }
 }

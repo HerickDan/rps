@@ -15,7 +15,7 @@ public class RoomEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     String apiId = UUID.randomUUID().toString();
-    @Column(name = "room_number")
+    @Column(name = "room_number", unique = true)
     int roomNumber = new Random().nextInt(1, 10000);
     @OneToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")

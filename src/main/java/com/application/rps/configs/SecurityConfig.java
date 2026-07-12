@@ -32,7 +32,7 @@ public class SecurityConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/ws").allowedOrigins("*");
+                registry.addMapping("/ws").allowedOrigins("*").allowedOrigins("http://localhost:3000");
             }
         };
     }
